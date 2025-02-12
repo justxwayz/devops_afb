@@ -42,7 +42,7 @@ workflows:
   build_test_deploy:
     jobs:
       - build
-      - unit-tests:
+      - unit_tests:
           requires:
             - build
       - deploy_dev:
