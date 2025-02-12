@@ -1,12 +1,10 @@
 //app/page.tsx
 
-import Calculator from "./calculator";
+import Calculator from "app/calculator";
 
 export const metadata = {
     title: "App Router",
 };
-
-import Counter from "app/counter";
 
 export default function Page() {
     return (

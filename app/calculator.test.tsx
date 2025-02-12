@@ -1,10 +1,10 @@
 // app/calculator.test.tsx
 
 import { render, screen, fireEvent } from "@testing-library/react";
-import Calculator from "../app/Calculator";
+import Calculator from "./calculator";
 
 test("Addition fonctionne correctement", () => {
-    render(<Calculator />);
+    render(<Calculator/>);
     const inputA = screen.getByPlaceholderText("Nombre A");
     const inputB = screen.getByPlaceholderText("Nombre B");
     const select = screen.getByRole("combobox");
