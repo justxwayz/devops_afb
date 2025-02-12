@@ -17,6 +17,15 @@ test("Addition fonctionne correctement", () => {
     fireEvent.click(button);
 
     expect(result).toHaveTextContent("8");
+});
+
+test("Soustraction fonctionne correctement", () => {
+    render(<Calculator />);
+    const inputA = screen.getByPlaceholderText("Nombre A");
+    const inputB = screen.getByPlaceholderText("Nombre B");
+    const select = screen.getByRole("combobox");
+    const button = screen.getByText("Calculer");
+    const result = screen.getByText(/Résultat/i);
 
     fireEvent.change(inputA, { target: { value: "13" } });
     fireEvent.change(inputB, { target: { value: "5" } });
@@ -24,6 +33,15 @@ test("Addition fonctionne correctement", () => {
     fireEvent.click(button);
 
     expect(result).toHaveTextContent("8");
+});
+
+test("Multiplication fonctionne correctement", () => {
+    render(<Calculator />);
+    const inputA = screen.getByPlaceholderText("Nombre A");
+    const inputB = screen.getByPlaceholderText("Nombre B");
+    const select = screen.getByRole("combobox");
+    const button = screen.getByText("Calculer");
+    const result = screen.getByText(/Résultat/i);
 
     fireEvent.change(inputA, { target: { value: "4" } });
     fireEvent.change(inputB, { target: { value: "2" } });
@@ -31,6 +49,15 @@ test("Addition fonctionne correctement", () => {
     fireEvent.click(button);
 
     expect(result).toHaveTextContent("8");
+});
+
+test("Division fonctionne correctement", () => {
+    render(<Calculator />);
+    const inputA = screen.getByPlaceholderText("Nombre A");
+    const inputB = screen.getByPlaceholderText("Nombre B");
+    const select = screen.getByRole("combobox");
+    const button = screen.getByText("Calculer");
+    const result = screen.getByText(/Résultat/i);
 
     fireEvent.change(inputA, { target: { value: "16" } });
     fireEvent.change(inputB, { target: { value: "2" } });
