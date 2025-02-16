@@ -37,7 +37,7 @@ jobs:
     steps:
       - checkout
       - run: echo "Deploying to production environment..."
-  # Integration production environment
+  # Deploy integration environment
   deploy_int:
     executor: node/default
     steps:
@@ -59,7 +59,7 @@ workflows:
               only:
                 - develop
       - deploy_int:
-          require:
+          requires:
             - unit_tests
           filters:
             branches:
