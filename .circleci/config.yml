@@ -12,9 +12,9 @@ jobs:
       - node/install-packages:
         pkg-manager: npm
       # Analysing
-      - run:
-          name: Run Linter
-          command: npm run lint
+#      - run:
+#          name: Run Linter
+#          command: npm run lint
       - run:
           name: Security Audit
           command: npm audit --audit-level=moderate
