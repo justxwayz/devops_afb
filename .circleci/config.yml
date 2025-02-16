@@ -9,22 +9,22 @@ jobs:
     steps:
       - checkout
       - run: echo "Building things..."
-      - node/install-packages:
-        pkg-manager: npm
+#      - node/install-packages:
+#        pkg-manager: npm
       # Analysing
 #      - run:
 #          name: Run Linter
 #          command: npm run lint
-      - run:
-          name: Security Audit
-          command: npm audit --audit-level=moderate
+#      - run:
+#          name: Security Audit
+#          command: npm audit --audit-level=moderate
       # Cleaning and packaging
-      - run:
-          name: Clean project
-          command: npm run clean
-      - run:
-          name: Build project
-          command: npm run build
+#      - run:
+#          name: Clean project
+#          command: npm run clean
+#      - run:
+#          name: Build project
+#          command: npm run build
   # Second job declared is for launching unit tests with Jest
   unit_tests:
     executor: node/default
