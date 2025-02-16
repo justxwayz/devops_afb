@@ -11,13 +11,13 @@ jobs:
       - run: echo "Building things..."
       - node/install-packages:
         pkg-manager: npm
-      # Analyse
+      # Analysing
       - run:
           name: Run Linter
           command: npm run lint
       - run:
           name: Security Audit
-          command: npm audit --audit-level=high
+          command: npm audit --audit-level=moderate
       # Cleaning and packaging
       - run:
           name: Clean project
