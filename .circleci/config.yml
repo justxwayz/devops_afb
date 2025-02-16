@@ -37,6 +37,12 @@ jobs:
     steps:
       - checkout
       - run: echo "Deploying to production environment..."
+  # Integration production environment
+  deploy_int:
+    executor: node/default
+    steps:
+      - checkout
+      - run: echo "Deploying to integration environment..."
 workflows:
   version: 2
   build-test-deploy:
