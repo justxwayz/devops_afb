@@ -43,7 +43,7 @@ jobs:
     steps:
       - checkout
       - run: echo "Deploying to production environment..."
-  # Deploy integration environment
+  # Test feature and hotfix branches without deployment
   deploy_feat_hot:
     executor: node/default
     steps:
