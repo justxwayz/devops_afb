@@ -79,7 +79,7 @@ workflows:
               only:
                 - master
       - deploy_feat_hot:
-          require:
+          requires:
             - unit_tests
           filters:
             branches:
