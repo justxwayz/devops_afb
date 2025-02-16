@@ -31,6 +31,12 @@ jobs:
     steps:
       - checkout
       - run: echo "Deploying to development environment..."
+  # Deploy integration environment
+  deploy_int:
+    executor: node/default
+    steps:
+      - checkout
+      - run: echo "Deploying to integration environment..."
   # Deploy production environment
   deploy_prod:
     executor: node/default
@@ -38,11 +44,11 @@ jobs:
       - checkout
       - run: echo "Deploying to production environment..."
   # Deploy integration environment
-  deploy_int:
+  deploy_feat_hot:
     executor: node/default
     steps:
       - checkout
-      - run: echo "Deploying to integration environment..."
+      - run: echo "Runnin tests on feature/hotfix branch..."
 workflows:
   version: 2
   build-test-deploy:
