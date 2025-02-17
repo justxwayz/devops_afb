@@ -127,6 +127,61 @@ jobs:
 #      - run: npm run test:accessibility
       - store_test_results:
           path: ./test-results/accessibility
+  # Verification tests
+  verify_tests:
+    executor: node/default
+    steps:
+      - checkout
+      # Installing dependencies
+      - node/install-packages:
+          pkg-manager: npm
+      - run: echo "Running verification tests..."
+      #      - run: npm run test:verification
+      - store_test_results:
+          path: ./test-results/verification
+  # Functional validation tests
+  valid_tests:
+    executor: node/default
+    steps:
+      - checkout
+      # Installing dependencies
+      - node/install-packages:
+          pkg-manager: npm
+      - run: echo "Running validation tests..."
+      #      - run: npm run test:validation
+      - store_test_results:
+          path: ./test-results/validation
+  # Functional validation tests
+  charge_tests:
+    executor: node/default
+    steps:
+      - checkout
+      # Installing dependencies
+      - node/install-packages:
+          pkg-manager: npm
+      - run: echo "Running validation tests..."
+      #      - run: npm run test:validation
+      - store_test_results:
+          path: ./test-results/validation
+  # Loading tests
+  load_tests:
+    executor: node/default
+    steps:
+      - checkout
+      # Installing dependencies
+      - node/install-packages:
+          pkg-manager: npm
+      - run: echo "Running load tests..."
+      #      - run: npm run test:load
+      - store_test_results:
+          path: ./test-results/validation
+    # Monitoring
+    monitoring:
+      executor: node/default
+      steps:
+        - checkout
+        - run: echo "Set up monitoring..."
+#        - run: npm run monitor
 workflows:
   version: 2
   build-test-deploy:
@@ -158,6 +213,17 @@ workflows:
       - access_tests:
           requires:
             - int_tests
+      - verify_tests:
+          requires:
+            - deploy_dev
+            - deploy_int
+            - deploy_prod
+      - load_tests:
+          requires:
+            - verify_tests
+      - monitoring:
+          requires:
+            - load_tests
       - deploy_dev:
           requires:
             - access_tests
