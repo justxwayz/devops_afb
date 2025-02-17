@@ -175,13 +175,13 @@ jobs:
       #      - run: npm run test:load
       - store_test_results:
           path: ./test-results/validation
-    # Monitoring
-    monitoring:
-      executor: node/default
-      steps:
-        - checkout
-        - run: echo "Set up monitoring..."
-#        - run: npm run monitor
+  # Monitoring
+  monitoring:
+    executor: node/default
+    steps:
+      - checkout
+      - run: echo "Set up monitoring..."
+#      - run: npm run monitor
 workflows:
   version: 2
   build-test-deploy:
