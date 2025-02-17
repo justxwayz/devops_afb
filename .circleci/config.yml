@@ -148,19 +148,21 @@ workflows:
             - int_tests
       - perf_tests:
           requires:
-            - reg_tests
+            - int_tests
       - secu_tests:
           requires:
-            - perf_tests
+            - build
       - compatible_tests:
           requires:
-            - secu_tests
+            - int_tests
       - access_tests:
           requires:
-            - compatible_tests
+            - int_tests
       - deploy_dev:
           requires:
             - access_tests
+            - compatible_tests
+            - perf_tests
           filters:
             branches:
               only:
