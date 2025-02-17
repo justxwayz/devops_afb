@@ -27,6 +27,7 @@ jobs:
       JEST_JUNIT_OUTPUT_DIR: ./test-results/
     steps:
       - checkout
+      # Installing dependencies
       - node/install-packages:
           pkg-manager: npm
       - run:
@@ -54,6 +55,78 @@ jobs:
     steps:
       - checkout
       - run: echo "Deploying to production environment..."
+  # Integration tests
+  int_tests:
+    executor: node/default
+    steps:
+      - checkout
+      # Installing dependencies
+      - node/install-packages:
+          pkg-manager: npm
+      - run: echo "Running integration tests..."
+  #      - run: npm run test:integration
+      - store_test_results:
+          path: ./test-results/integration
+  # Regression tests
+  reg_tests:
+    executor: node/default
+    steps:
+      - checkout
+      # Installing dependencies
+      - node/install-packages:
+          pkg-manager: npm
+      - run: echo "Running regression tests..."
+  #      - run: npm run test:regression
+      - store_test_results:
+          path: ./test-results/regression
+  # Performance tests
+  perf_tests:
+    executor: node/default
+    steps:
+      - checkout
+      # Installing dependencies
+      - node/install-packages:
+          pkg-manager: npm
+      - run: echo "Running performance tests..."
+  #      - run: npm run test:performance
+      - store_test_results:
+          path: ./test-results/performance
+  # Security tests
+  secu_tests:
+    executor: node/default
+    steps:
+      - checkout
+      # Installing dependencies
+      - node/install-packages:
+          pkg-manager: npm
+      - run: echo "Running security tests..."
+  #      - run: npm audit --audit-level=moderate
+      - store_test_results:
+          path: ./test-results/security
+  # Compatibility tests
+  compatible_tests:
+    executor: node/default
+    steps:
+      - checkout
+      # Installing dependencies
+      - node/install-packages:
+          pkg-manager: npm
+      - run: echo "Running compatibility tests..."
+  #      - run: npm run test:compatibility
+      - store_test_results:
+          path: ./test-results/compatibility
+  # Accessibility tests
+  access_tests:
+    executor: node/default
+    steps:
+      - checkout
+      # Installing dependencies
+      - node/install-packages:
+          pkg-manager: npm
+      - run: echo "Running accessibility tests..."
+#      - run: npm run test:accessibility
+      - store_test_results:
+          path: ./test-results/accessibility
 workflows:
   version: 2
   build-test-deploy:
@@ -67,9 +140,27 @@ workflows:
       - unit_tests:
           requires:
             - build
-      - deploy_dev:
+      - int_tests:
           requires:
             - unit_tests
+      - reg_tests:
+          requires:
+            - int_tests
+      - perf_tests:
+          requires:
+            - reg_tests
+      - secu_tests:
+          requires:
+            - perf_tests
+      - compatible_tests:
+          requires:
+            - secu_tests
+      - access_tests:
+          requires:
+            - compatible_tests
+      - deploy_dev:
+          requires:
+            - access_tests
           filters:
             branches:
               only:
