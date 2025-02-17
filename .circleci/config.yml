@@ -145,18 +145,7 @@ jobs:
       # Installing dependencies
       - node/install-packages:
           pkg-manager: npm
-      - run: echo "Running verification tests..."
-      #      - run: npm run test:verification
-      - store_test_results:
-          path: ./test-results/verification
-  # Functional validation tests
-  valid_tests:
-    executor: node/default
-    steps:
-      - checkout
-      # Installing dependencies
-      - node/install-packages:
-          pkg-manager: npm
+      - run: echo "Verify application after deploy..."
       - run: echo "Running validation tests..."
       #      - run: npm run test:validation
       - store_test_results:
@@ -247,4 +236,4 @@ workflows:
             - verify_tests
       - monitoring:
           requires:
-            - load_tests
+            - verify_tests
