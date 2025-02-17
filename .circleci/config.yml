@@ -9,22 +9,17 @@ jobs:
     steps:
       - checkout
       - run: echo "Building things..."
+      - run: echo "Install dependencies"
 #      - node/install-packages:
 #        pkg-manager: npm
-      # Analysing
-#      - run:
-#          name: Run Linter
-#          command: npm run lint
-#      - run:
-#          name: Security Audit
-#          command: npm audit --audit-level=moderate
+      # Code analysing
+      - run: echo "Running analysing and security"
+#      - run: npm run lint
+#      - run: npm audit --audit-level=moderate
       # Cleaning and packaging
-#      - run:
-#          name: Clean project
-#          command: npm run clean
-#      - run:
-#          name: Build project
-#          command: npm run build
+      - run: echo "Running cleaning and packaging"
+#      - run: npm run clean
+#      - run: npm run build
   # Second job declared is for launching unit tests with Jest
   unit_tests:
     executor: node/default
@@ -59,17 +54,16 @@ jobs:
     steps:
       - checkout
       - run: echo "Deploying to production environment..."
-  # Test feature and hotfix branches without deployment
-  deploy_feat_hot:
-    executor: node/default
-    steps:
-      - checkout
-      - run: echo "Running tests on feature/hotfix branch..."
 workflows:
   version: 2
   build-test-deploy:
     jobs:
-      - build
+      - build:
+          filters:
+            branches:
+              ignore:
+                - /^feature.*/
+                - /^hotfix.*/
       - unit_tests:
           requires:
             - build
@@ -94,11 +88,3 @@ workflows:
             branches:
               only:
                 - master
-      - deploy_feat_hot:
-          requires:
-            - unit_tests
-          filters:
-            branches:
-              only:
-              - /^feature.*/
-              - /^hotfix.*/
