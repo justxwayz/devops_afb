@@ -3,6 +3,7 @@
 "use client";
 
 import { useState } from "react";
+import "../styles/calculator.css"
 
 export default function Calculator() {
     const [a, setA] = useState("");
@@ -35,17 +36,22 @@ export default function Calculator() {
     }
 
     return (
-        <div>
-            <input type="text" value={a} onChange={(e) => setA(e.target.value)} placeholder="Nombre A" />
-            <select value={operator} onChange={(e) => setOperator(e.target.value)}>
-                <option value="+">+</option>
-                <option value="-">-</option>
-                <option value="*">*</option>
-                <option value="/">/</option>
-            </select>
-            <input type="text" value={b} onChange={(e) => setB(e.target.value)} placeholder="Nombre B" />
+        <div className="calculator">
+            <h2>Calculatrice</h2>
+            <div className="input-group">
+                <input type="text" value={a} onChange={(e) => setA(e.target.value)} placeholder="Nombre A" />
+                <select value={operator} onChange={(e) => setOperator(e.target.value)}>
+                    <option value="+">+</option>
+                    <option value="-">-</option>
+                    <option value="*">*</option>
+                    <option value="/">/</option>
+                </select>
+                <input type="text" value={b} onChange={(e) => setB(e.target.value)} placeholder="Nombre B" />
+            </div>
             <button onClick={calculate}>Calculer</button>
-            <h3>Résultat : {result}</h3>
+            <div className="result-box">
+                <h3 className="result">Résultat : {result}</h3>
+            </div>
         </div>
     );
 }
